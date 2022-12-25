@@ -17,14 +17,6 @@ public class WebOzonTests {
 
     private static final String URL_OZON = "https://www.ozon.ru/";
 
-    @BeforeAll
-    public static void beforeTests(){
-        Configuration.browser = "FIREFOX";
-        step("Открываем главную страницу" + URL_OZON, () -> {
-            open(URL_OZON);
-        });
-    }
-
     @ValueSource(strings = {
             "Одежда и обувь",
             "Электроника",
@@ -32,6 +24,9 @@ public class WebOzonTests {
     })
     @ParameterizedTest(name = "Есть заголовок раздела {0} в меню категорий на странице " + URL_OZON)
     void checkCategoriesInMenuWithValueSource(String searchQuery) {
+        step("Открываем главную страницу" + URL_OZON, () -> {
+            open(URL_OZON);
+        });
         step("Есть категория " + searchQuery + " в меню");
         $("ul[data-widget='horizontalMenu']").shouldHave(Condition.text(searchQuery));
     }
@@ -41,8 +36,11 @@ public class WebOzonTests {
 //            "RUB, ₽",
 //            "USD, $",
     })
-    @ParameterizedTest(name = "Отображается {1} для валюты {0} в карточке товара")
+    @ParameterizedTest(name = "Отображается {1} для валюты {0} в карточке товара для города из РФ")
     void checkCurrencyIconInProductCardWithCsvSource(String currency, String icon) {
+        step("Открываем главную страницу" + URL_OZON, () -> {
+            open(URL_OZON);
+        });
         step("Выбираем город из РФ", () -> {
             $("div[data-widget='addressBookBarWeb']").click();
             $(byText("Изменить")).click();
