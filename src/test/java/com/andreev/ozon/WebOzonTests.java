@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 @Nested
-@DisplayName("Параметризованные тесты для сайта Ozon")
+@DisplayName("Параметризованные тесты ValueSource и CsvSource для сайта Ozon")
 public class WebOzonTests {
 
     private static final String URL_OZON = "https://www.ozon.ru/";
