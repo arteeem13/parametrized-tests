@@ -1,7 +1,6 @@
-package com.andreev.ozon;
+package com.andreev.valueSourceAndCsvSource;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
