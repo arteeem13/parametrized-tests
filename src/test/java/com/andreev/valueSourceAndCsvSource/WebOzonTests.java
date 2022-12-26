@@ -1,19 +1,20 @@
 package com.andreev.valueSourceAndCsvSource;
 
+import com.andreev.ConfigurationTests.WebAttachments;
 import com.codeborne.selenide.Condition;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 @Nested
 @DisplayName("Параметризованные тесты ValueSource и CsvSource для сайта Ozon")
 public class WebOzonTests {
-
     private static final String URL_OZON = "https://www.ozon.ru/";
 
     @ValueSource(strings = {
@@ -31,19 +32,14 @@ public class WebOzonTests {
     }
 
     @CsvSource({
-            "KZT, ₸"
-//            "RUB, ₽",
-//            "USD, $",
+            "KZT, ₸",
+            "RUB, ₽",
+            "USD, $",
     })
-    @ParameterizedTest(name = "Отображается {1} для валюты {0} в карточке товара для города из РФ")
+    @ParameterizedTest(name = "Отображается {1} для валюты {0} в карточке товара")
     void checkCurrencyIconInProductCardWithCsvSource(String currency, String icon) {
         step("Открываем главную страницу" + URL_OZON, () -> {
             open(URL_OZON);
-        });
-        step("Выбираем город из РФ", () -> {
-            $("div[data-widget='addressBookBarWeb']").click();
-            $(byText("Изменить")).click();
-            $(byText("Москва")).click();
         });
         step("Кликаем по кнопке выбора валюты", () ->{
             $("div[data-widget='selectedCurrency']").click();
@@ -54,6 +50,7 @@ public class WebOzonTests {
         });
         step("Есть " + icon + " в описании товаров", () -> {
             $("div[data-widget='skuLine']").shouldHave(Condition.text(icon));
+            WebAttachments.takeScreenshot();
         });
     }
 }
