@@ -1,4 +1,4 @@
-package com.andreev.ConfigurationTests;
+package com.andreev.configurationsForTests;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;

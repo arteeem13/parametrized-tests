@@ -1,6 +1,6 @@
 package com.andreev.valueSourceAndCsvSource;
 
-import com.andreev.ConfigurationTests.WebAttachments;
+import com.andreev.configurationsForTests.WebAttachments;
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
